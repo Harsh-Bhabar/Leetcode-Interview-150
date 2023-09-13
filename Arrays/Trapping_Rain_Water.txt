@@ -1,0 +1,62 @@
+class Solution {
+public:
+    int trap(vector<int>& nums) {
+        int n = nums.size();
+
+        vector<int> leftMax(n);
+        leftMax[0] = nums[0];
+
+        vector<int> rightMax(n);
+        rightMax[n-1] = nums[n-1];
+
+        int ans = 0;
+
+        for(int i=1; i<n; i++){
+            leftMax[i] = max(leftMax[i-1], nums[i]);
+        }
+        for(int j=n-2; j>=0; j--){
+            rightMax[j] = max(rightMax[j+1], nums[j]);
+        }
+
+        for(int i=0; i<n; i++){
+            ans += min(leftMax[i], rightMax[i]) - nums[i];
+        }
+
+        return ans;
+    }
+};
+
+
+// most optimal
+
+class Solution {
+public:
+    int trap(vector<int>& nums) {
+        int n = nums.size();
+        int l = 0 ;
+        int r = n-1;
+        int leftMax = nums[0];
+        int rightMax = nums[n-1];
+        int ans = 0;
+
+        while(l < r){
+            if(nums[l] < nums[r]){
+                if(leftMax < nums[l]){
+                    leftMax = nums[l];
+                }else{
+                    ans += (leftMax - nums[l]);
+                }
+                l++;
+            }else{
+                if(rightMax < nums[r]){
+                    rightMax = nums[r];
+                }else{
+                    ans += (rightMax - nums[r]);
+                }
+                r--;
+            }
+        }
+
+        return ans;
+    }
+};
