@@ -1,0 +1,29 @@
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        // using sorting 
+        sort(s.begin(), s.end());
+        sort(t.begin(), t.end());
+
+        return s == t;
+
+        // using hashmap
+        // unordered_map<int, int> mp;
+
+        // for(auto x: s){
+        //     mp[x]++;
+        // }
+
+        // for(auto y: t){
+        //     mp[y]--;
+        // }
+
+        // for(auto x: mp){
+        //     if(x.second != 0){
+        //         return false;
+        //     }
+        // }
+
+        // return true;
+    }
+};
