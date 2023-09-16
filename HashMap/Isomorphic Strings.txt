@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        int n = s.size();
+        unordered_map<char, char> mp; // since we need mapping from both sides
+        set<char> st; 
+
+        for(int i=0; i<n; i++){
+            if(mp.count(s[i]) == 0 && st.count(t[i]) == 0){ 
+                // doesn't exist in map and also not in set
+                mp[s[i]] = t[i];
+                st.insert(t[i]);
+            }
+            else if(mp.count(s[i]) == 0 && st.count(t[i]) != 0){
+                return false;
+            }
+            else if(mp[s[i]] != t[i]){
+                return false;
+            }
+
+        }
+
+        return true;
+    }
+};
