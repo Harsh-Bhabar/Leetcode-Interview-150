@@ -1,0 +1,33 @@
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+
+        unordered_set<string> mp;
+
+        for(int i=0; i<9; i++){
+            for(int j=0; j<9; j++){
+                if(board[i][j] != '.'){
+                    int num = board[i][j] - '0';
+
+                    string row = to_string(num) + "_R_" + to_string(i);
+                    string col = to_string(num) + "_C_" + to_string(j);
+                    string box = to_string(num) + "_B_" + to_string(i/3) + "_" + to_string(j/3);
+
+                    // if exist
+                    if(mp.find(row) != mp.end() || 
+                        mp.find(col) != mp.end() || 
+                        mp.find(box) != mp.end()){
+                            return false;
+                    } 
+                    else{
+                        mp.insert(row);
+                        mp.insert(col);
+                        mp.insert(box);
+                    }
+                }   
+            }
+        }
+
+        return true;
+    }
+};
