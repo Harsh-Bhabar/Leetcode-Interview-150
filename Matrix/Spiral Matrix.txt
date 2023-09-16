@@ -1,0 +1,42 @@
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& mat) {
+        vector<int> ans;
+        int m = mat.size();
+        int n = mat[0].size();
+        int i = 0;
+        int j = 0;
+
+        while(i >= 0 and i < m and j >= 0 and j < n and mat[i][j] != INT_MAX){
+            // to right
+            for(; j<n and mat[i][j] != INT_MAX; j++){
+                ans.push_back(mat[i][j]);
+                mat[i][j] = INT_MAX;
+            }
+
+            // to down
+            i++; j--;
+            for(; i<m and mat[i][j] != INT_MAX; i++){
+                ans.push_back(mat[i][j]);
+                mat[i][j] = INT_MAX;
+            }
+
+            // to left 
+            i--; j--;
+            for(; j>=0 and mat[i][j] != INT_MAX; j--){
+                ans.push_back(mat[i][j]);
+                mat[i][j] = INT_MAX;
+            }
+
+            // to up 
+            i--; j++; 
+            for(; i>=0 and mat[i][j] != INT_MAX; i--){
+                ans.push_back(mat[i][j]);
+                mat[i][j] = INT_MAX;
+            }
+            i++; j++;
+        }
+
+        return ans;
+    }
+};
